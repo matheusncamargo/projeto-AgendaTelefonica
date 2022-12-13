@@ -1,16 +1,7 @@
 package br.com.ada.agenda;
 
+import br.com.ada.agenda.util.Arquivo;
 import br.com.ada.agenda.util.ConsoleUIHelper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +21,7 @@ public class Agenda {
         return Collections.unmodifiableList(contatos);
     }
 
+    /* CONTATO */
     public void addContatos(List<Contato> contatos) {
         contatos.forEach(novoContato -> {
             if(verificaContatoExiste(novoContato)){
@@ -50,7 +42,7 @@ public class Agenda {
                 .anyMatch(contatoCadastrado -> contatoCadastrado.equals(contato));
     }
 
-    public void adicionarContato(Scanner entrada) {
+    public void adicionarContato(Scanner entrada, Agenda agenda) {
 
         String nome = ConsoleUIHelper.askSimpleInput("Nome do Contato");
         String sobreNome = ConsoleUIHelper.askSimpleInput("Sobrenome do Contato");
@@ -61,8 +53,9 @@ public class Agenda {
 
         try{
             addContatos(List.of(novoContato));
-        }catch (RuntimeException exception){
-            System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
+            Arquivo.exportarArquivo(agenda);
+        }catch (Exception e){
+            System.out.printf("Erro ao cadastrar: %s %n", e.getMessage());
         }
     }
 
@@ -90,7 +83,7 @@ public class Agenda {
         return this.contatos.get(codigoContato - FATOR_INDICE);
     }
 
-    public void removerContato(Scanner entrada){
+    public void removerContato(Scanner entrada, Agenda agenda){
         System.out.println("Qual o primeiro nome do contato que deseja remover: ");
         String nomeRemover = entrada.nextLine();
 
@@ -104,14 +97,19 @@ public class Agenda {
             contatos.removeIf(e -> e.getEmail().equals(emailRemover) &&
                     e.getNome().equalsIgnoreCase(nomeRemover) &&
                     e.getSobreNome().equalsIgnoreCase(sobrenomeRemover) );
-
+            Arquivo.exportarArquivo(agenda);
         } catch (Exception e){
             System.out.println("Contato não encontrado.");
         }
     }
 
-    public void removerTodosContatos(){
+    public void removerTodosContatos(Agenda agenda){
         contatos.clear();
+        try{
+            Arquivo.exportarArquivo(agenda);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Contato buscarContatoNomeSobrenome(Scanner entrada){
@@ -135,8 +133,8 @@ public class Agenda {
         }
     }
 
-    public void printContatoEncontrado(Scanner entrada){
 
+    public void printContatoEncontrado(Scanner entrada){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
@@ -167,17 +165,22 @@ public class Agenda {
             System.out.println("Contato não encontrado");
         }
     }
-    public void adicionarTelefone(Scanner entrada){
+    public void adicionarTelefone(Scanner entrada, Agenda agenda){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
             contato.adicionarTelefone();
+            try{
+                Arquivo.exportarArquivo(agenda);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Contato não encontrado");
         }
     }
 
-    public void removerTelefone(Scanner entrada){
+    public void removerTelefone(Scanner entrada, Agenda agenda){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
@@ -185,19 +188,26 @@ public class Agenda {
             try{
                 int indice = Integer.parseInt(ConsoleUIHelper.askSimpleInput("Informe o índice do telefone: "));
                 contato.removerTelefone(indice);
-            } catch (RuntimeException e){
+                Arquivo.exportarArquivo(agenda);
+            } catch (Exception e){
                 System.out.println("Digite um número inteiro maior que zero: ");
+                System.out.println(e.getMessage());
             }
         } else {
             System.out.println("Contato não encontrado");
         }
     }
     /* ENDEREÇO */
-    public void adicionarEndereco(Scanner entrada){
+    public void adicionarEndereco(Scanner entrada, Agenda agenda){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
             contato.adicionarEndereco();
+            try{
+                Arquivo.exportarArquivo(agenda);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Contato não encontrado");
         }
@@ -223,7 +233,7 @@ public class Agenda {
         }
     }
 
-    public void removerEndereco(Scanner entrada){
+    public void removerEndereco(Scanner entrada, Agenda agenda){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
@@ -231,13 +241,13 @@ public class Agenda {
             try{
                 int indice = Integer.parseInt(ConsoleUIHelper.askSimpleInput("Informe o índice do endereço: "));
                 contato.removerEndereco(indice);
-            } catch (RuntimeException e){
+                Arquivo.exportarArquivo(agenda);
+            } catch (Exception e){
                 System.out.println("Digite um número inteiro maior que zero: ");
+                System.out.println(e.getMessage());
             }
         } else {
             System.out.println("Contato não encontrado");
         }
     }
-
-
 }

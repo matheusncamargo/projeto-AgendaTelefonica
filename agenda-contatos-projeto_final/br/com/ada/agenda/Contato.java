@@ -155,7 +155,7 @@ public class Contato {
     }
 
     private boolean verificaEnderecoExiste(Endereco endereco){
-        return this.telefones.stream()
+        return this.enderecos.stream()
                 .anyMatch(enderecoCadastrado -> enderecoCadastrado.equals(endereco));
     }
 

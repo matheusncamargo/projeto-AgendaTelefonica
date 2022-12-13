@@ -42,54 +42,22 @@ public class Main {
             System.out.print("\nEscolha uma opção: ");
 
             switch (entrada.nextLine().trim()) {
-                case "1":
-                    agenda.adicionarContato(entrada);
-                    break;
-                case "2":
-                    agenda.listarContatos();
-                    break;
-                case "3":
-                    agenda.removerContato(entrada);
-                    break;
-                case "4":
-                    agenda.removerTodosContatos();
-                    break;
-                case "5":
-                    agenda.printContatoEncontrado(entrada);
-                    break;
-                case "6":
-                    agenda.adicionarTelefone(entrada);
-                    break;
-                case "7":
-                    agenda.adicionarEndereco(entrada);
-                    break;
-                case "8":
-                    agenda.removerTelefone(entrada);
-                    break;
-                case "9":
-                    agenda.removerEndereco(entrada);
-                    break;
-                case "10":
-                    Arquivo.exportarArquivo(agenda);
-                    break;
-                case "11":
-                    agenda = Arquivo.importarArquivo();
-                    break;
-                case "12":
-                    agenda.listarTelefones(entrada);
-                    break;
-                case "13":
-                    agenda.listarEndereco(entrada);
-                    break;
-                case "14":
-                    agenda.exibirInfosEnderecos(entrada);
-                    break;
-                case "15":
-                    agenda.exibirInfosTelefones(entrada);
-                    break;
-                default:
-                    System.out.println("Digite uma opção válida");
-                    break;
+                case "1" -> agenda.adicionarContato(entrada, agenda);
+                case "2" -> agenda.listarContatos();
+                case "3" -> agenda.removerContato(entrada, agenda);
+                case "4" -> agenda.removerTodosContatos(agenda);
+                case "5" -> agenda.printContatoEncontrado(entrada);
+                case "6" -> agenda.adicionarTelefone(entrada, agenda);
+                case "7" -> agenda.adicionarEndereco(entrada, agenda);
+                case "8" -> agenda.removerTelefone(entrada, agenda);
+                case "9" -> agenda.removerEndereco(entrada, agenda);
+                case "10" -> Arquivo.exportarArquivo(agenda);
+                case "11" -> agenda = Arquivo.importarArquivo();
+                case "12" -> agenda.listarTelefones(entrada);
+                case "13" -> agenda.listarEndereco(entrada);
+                case "14" -> agenda.exibirInfosEnderecos(entrada);
+                case "15" -> agenda.exibirInfosTelefones(entrada);
+                default -> System.out.println("Digite uma opção válida");
             }
 
             System.out.println("Deseja continuar? 1 - Sim, 2 - Não");
