@@ -146,22 +146,32 @@ public class Agenda {
         }
     }
 
+/* TELEFONE */
 
-    public void adicionarTelefone(Scanner entrada){
+    public void listarTelefones(Scanner entrada){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
-            contato.adicionarTelefone();
+            contato.mostrarTelefones();
         } else {
             System.out.println("Contato não encontrado");
         }
     }
 
-    public void adicionarEndereco(Scanner entrada){
+    public void exibirInfosTelefones(Scanner entrada){
         Contato contato = buscarContatoNomeSobrenome(entrada);
 
         if (contato != null){
-            contato.adicionarEndereco();
+            contato.exibirTelefones();
+        } else {
+            System.out.println("Contato não encontrado");
+        }
+    }
+    public void adicionarTelefone(Scanner entrada){
+        Contato contato = buscarContatoNomeSobrenome(entrada);
+
+        if (contato != null){
+            contato.adicionarTelefone();
         } else {
             System.out.println("Contato não encontrado");
         }
@@ -178,6 +188,36 @@ public class Agenda {
             } catch (RuntimeException e){
                 System.out.println("Digite um número inteiro maior que zero: ");
             }
+        } else {
+            System.out.println("Contato não encontrado");
+        }
+    }
+    /* ENDEREÇO */
+    public void adicionarEndereco(Scanner entrada){
+        Contato contato = buscarContatoNomeSobrenome(entrada);
+
+        if (contato != null){
+            contato.adicionarEndereco();
+        } else {
+            System.out.println("Contato não encontrado");
+        }
+    }
+
+    public void listarEndereco(Scanner entrada){
+        Contato contato = buscarContatoNomeSobrenome(entrada);
+
+        if (contato != null){
+            contato.mostrarEndereco();
+        } else {
+            System.out.println("Contato não encontrado");
+        }
+    }
+
+    public void exibirInfosEnderecos(Scanner entrada){
+        Contato contato = buscarContatoNomeSobrenome(entrada);
+
+        if (contato != null){
+            contato.exibirEnderecos();
         } else {
             System.out.println("Contato não encontrado");
         }

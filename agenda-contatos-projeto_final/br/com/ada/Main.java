@@ -34,13 +34,16 @@ public class Main {
                     "\n8 - Remover um telefone de um contato existente" +
                     "\n9 - Remover um endereço de um contato existente" +
                     "\n10 - Exportar contatos para um arquivo de texto" +
-                    "\n11 - Importar contatos a partir de um arquivo de texto");
+                    "\n11 - Importar contatos a partir de um arquivo de texto" +
+                    "\n12 - Listar todos os telefones de um contato" +
+                    "\n13 - Listar todos os endereços de um contato" +
+                    "\n14 - Exibir todas as informações de um endereço de um contato" +
+            "\n15 - Exibir todas as informações de um telefone de um contato");
             System.out.print("\nEscolha uma opção: ");
 
             switch (entrada.nextLine().trim()) {
                 case "1":
                     agenda.adicionarContato(entrada);
-
                     break;
                 case "2":
                     agenda.listarContatos();
@@ -71,6 +74,18 @@ public class Main {
                     break;
                 case "11":
                     agenda = Arquivo.importarArquivo();
+                    break;
+                case "12":
+                    agenda.listarTelefones(entrada);
+                    break;
+                case "13":
+                    agenda.listarEndereco(entrada);
+                    break;
+                case "14":
+                    agenda.exibirInfosEnderecos(entrada);
+                    break;
+                case "15":
+                    agenda.exibirInfosTelefones(entrada);
                     break;
                 default:
                     System.out.println("Digite uma opção válida");

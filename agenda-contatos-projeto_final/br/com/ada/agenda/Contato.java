@@ -78,6 +78,8 @@ public class Contato {
         return Collections.unmodifiableList(telefones); //Lista não pode ser modificada depois de usar .unmodifiableList()
     }
 
+    /* TELEFONE */
+
     public void addTelefone(Telefone novoTelefone){
         if(verificaTelefoneExiste(novoTelefone)){
             throw new RuntimeException("Telefone já cadastrado!");
@@ -88,23 +90,6 @@ public class Contato {
     private boolean verificaTelefoneExiste(Telefone telefone){
         return this.telefones.stream()
                 .anyMatch(telefoneCadastrado -> telefoneCadastrado.equals(telefone));
-    }
-
-    /* Endereço */
-    public void addEndereco(Endereco novoEndereco){
-        if(verificaEnderecoExiste(novoEndereco)){
-            throw new RuntimeException("Endereço já cadastrado!");
-        }
-        this.enderecos.add(novoEndereco);
-    }
-
-    private boolean verificaEnderecoExiste(Endereco endereco){
-        return this.telefones.stream()
-                .anyMatch(enderecoCadastrado -> enderecoCadastrado.equals(endereco));
-    }
-
-    public List<Endereco> getEnderecos() {
-        return Collections.unmodifiableList(enderecos);
     }
 
     public void adicionarTelefone(){
@@ -130,6 +115,52 @@ public class Contato {
         }catch (RuntimeException exception){
             System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
         }
+    }
+
+    public void mostrarTelefones(){
+        if (this.telefones.isEmpty()){
+            System.out.println("Não há telefone(s) cadastrado(s)");
+        } else{
+            telefones.forEach(tel -> {
+                System.out.printf("%d - %s(%s)%s\n", telefones.indexOf(tel),
+                        tel.ddi, tel.ddd, tel.numero);
+            });
+        }
+    }
+
+    public void removerTelefone(int indexTelefone){
+
+        if(indexTelefone <= telefones.size() - 1){
+            this.telefones.remove(indexTelefone);
+            System.out.println("Telefone removido com sucesso!");
+        } else {
+            System.out.println("Índice não encontrado");
+        };
+    }
+
+    public void exibirTelefones(){
+        if (this.telefones.isEmpty()){
+            System.out.println("Não há telefone(s) cadastrado(s)");
+        } else{
+            telefones.forEach(System.out::println);
+        }
+    }
+
+    /* ENDEREÇO */
+    public void addEndereco(Endereco novoEndereco){
+        if(verificaEnderecoExiste(novoEndereco)){
+            throw new RuntimeException("Endereço já cadastrado!");
+        }
+        this.enderecos.add(novoEndereco);
+    }
+
+    private boolean verificaEnderecoExiste(Endereco endereco){
+        return this.telefones.stream()
+                .anyMatch(enderecoCadastrado -> enderecoCadastrado.equals(endereco));
+    }
+
+    public List<Endereco> getEnderecos() {
+        return Collections.unmodifiableList(enderecos);
     }
 
     public void adicionarEndereco(){
@@ -160,29 +191,6 @@ public class Contato {
         }
 
     }
-/* Telefone */
-    public void mostrarTelefones(){
-        if (this.telefones.isEmpty()){
-            System.out.println("Não há telefone(s) cadastrado(s)");
-        } else{
-            telefones.forEach(tel -> {
-                System.out.printf("%d - %s(%s)%s\n", telefones.indexOf(tel),
-                        tel.ddi, tel.ddd, tel.numero);
-            });
-        }
-    }
-
-    public void removerTelefone(int indexTelefone){
-
-        if(indexTelefone <= telefones.size() - 1){
-            this.telefones.remove(indexTelefone);
-            System.out.println("Telefone removido com sucesso!");
-        } else {
-            System.out.println("Índice não encontrado");
-        };
-    }
-
-    /* Endereço */
 
     public void mostrarEndereco(){
         if (this.enderecos.isEmpty()){
@@ -196,8 +204,16 @@ public class Contato {
             });
         }
     }
-    public void removerEndereco(int indexEndereco){
 
+    public void exibirEnderecos(){
+        if (this.enderecos.isEmpty()){
+            System.out.println("Não há endereço(s) cadastrado(s)");
+        } else{
+            enderecos.forEach(System.out::println);
+        }
+    }
+
+    public void removerEndereco(int indexEndereco){
         if(indexEndereco <= enderecos.size() - 1){
             this.enderecos.remove(indexEndereco);
             System.out.println("Endereço removido com sucesso!");
