@@ -18,8 +18,12 @@ public class Contato {
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
 
+    //Só o "json" utiliza o construtor padrão:
+    private Contato() {
+    }
 
-    public Contato(String nome, String sobreNome, String email, String empresa) {
+    public Contato(String nome, String sobreNome,
+                   String email, String empresa) {
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.email = email;
@@ -28,7 +32,9 @@ public class Contato {
         this.enderecos = new ArrayList<>();
     }
 
-    public Contato (String nome, String sobreNome, String empresa, List<Telefone> telefones, List<Endereco> enderecos) {
+    public Contato (String nome, String sobreNome,
+                    String empresa, List<Telefone> telefones,
+                    List<Endereco> enderecos) {
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.empresa = empresa;
@@ -69,7 +75,7 @@ public class Contato {
     }
 
     public List<Telefone> getTelefones() {
-        return Collections.unmodifiableList(telefones);
+        return Collections.unmodifiableList(telefones); //Lista não pode ser modificada depois de usar .unmodifiableList()
     }
 
     public void addTelefone(Telefone novoTelefone){
@@ -146,7 +152,8 @@ public class Contato {
         String estado = ConsoleUIHelper.askSimpleInput("UF");
 
         try{
-            Endereco endereco = new Endereco(tipo, logradouro, bairro, cep, numero, complemento, cidade, Estado.valueOf(estado));
+            Endereco endereco = new Endereco(tipo, logradouro, bairro, cep,
+                    numero, complemento, cidade, Estado.valueOf(estado));
             addEndereco(endereco);
         } catch (RuntimeException e){
             System.out.println("Erro ao cadastrar");
@@ -159,7 +166,6 @@ public class Contato {
             System.out.println("Não há telefone(s) cadastrado(s)");
         } else{
             telefones.forEach(tel -> {
-                //01 - +55(11)3665985
                 System.out.printf("%d - %s(%s)%s\n", telefones.indexOf(tel),
                         tel.ddi, tel.ddd, tel.numero);
             });

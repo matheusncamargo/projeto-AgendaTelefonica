@@ -13,6 +13,9 @@ public class Endereco {
     private String cidade;
     private Estado uf;
 
+    private Endereco() {
+    }
+
     public Endereco(TipoEndereco tipo, String logradouro, String bairro, String cep, String numero, String complemento, String cidade, Estado uf) {
         this.tipo = tipo;
         this.logradouro = logradouro;

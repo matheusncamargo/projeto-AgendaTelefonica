@@ -10,6 +10,9 @@ public class Telefone {
     public String ddd;
     public String numero;
 
+    private Telefone() {
+    }
+
     public Telefone(TipoTelefone tipo, String ddi, String ddd, String numero){
         this.tipo = tipo;
         this.ddi = ddi;

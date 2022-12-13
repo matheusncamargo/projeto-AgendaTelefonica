@@ -1,8 +1,16 @@
 package br.com.ada.agenda;
 
 import br.com.ada.agenda.util.ConsoleUIHelper;
-import org.w3c.dom.ls.LSOutput;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -92,7 +100,6 @@ public class Agenda {
         System.out.println("Qual o email do contato que deseja remover: ");
         String emailRemover = entrada.nextLine();
 
-        //Mensagem do erro não aparece
         try{
             contatos.removeIf(e -> e.getEmail().equals(emailRemover) &&
                     e.getNome().equalsIgnoreCase(nomeRemover) &&
@@ -115,6 +122,7 @@ public class Agenda {
         String sobrenome = entrada.nextLine();
 
         List<Contato> contatosEncontrados = new ArrayList<>();
+
         contatosEncontrados = this.contatos.stream()
                 .filter(e ->  e.getNome().equalsIgnoreCase(primeiroNome) &&
                                 e.getSobreNome().equalsIgnoreCase(sobrenome))
@@ -190,7 +198,6 @@ public class Agenda {
             System.out.println("Contato não encontrado");
         }
     }
-
 
 
 }

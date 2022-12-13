@@ -2,30 +2,29 @@ package br.com.ada;
 
 import br.com.ada.agenda.Agenda;
 import br.com.ada.agenda.Contato;
+import br.com.ada.agenda.util.Arquivo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
 
-        Agenda agenda = new Agenda();
+        Agenda agenda;
+
+        try{
+            agenda = new ObjectMapper().readValue(new URL("file:agenda.json"), Agenda.class);
+        } catch (Exception e){
+            agenda = new Agenda();
+        }
 
         Scanner entrada = new Scanner(System.in);
-
         String resposta;
 
         do {
-
-          /*  AsciiTable at = new AsciiTable();
-
-            at.addRule();
-            at.addRow("row 1 col 1", "row 1 col 2");
-            at.addRule();
-            at.addRow("row 2 col 1", "row 2 col 2");
-            at.addRule();
-
-            System.out.println(at.render());*/
-
             System.out.println("####### AGENDA CONTATOS #########\n");
             System.out.println("1 - Adicionar Contato   \n2 - Listar Contatos " +
                     "\n3 - Remover um contato \n4 - Remover todos os contatos" +
@@ -33,12 +32,15 @@ public class Main {
             "\n6 - Adicionar um telefone a um contato existente" +
                     "\n7 - Adicionar um endereço a um contato existente" +
                     "\n8 - Remover um telefone de um contato existente" +
-                    "\n9 - Remover um endereço de um contato existente");
+                    "\n9 - Remover um endereço de um contato existente" +
+                    "\n10 - Exportar contatos para um arquivo de texto" +
+                    "\n11 - Importar contatos a partir de um arquivo de texto");
             System.out.print("\nEscolha uma opção: ");
 
             switch (entrada.nextLine().trim()) {
                 case "1":
                     agenda.adicionarContato(entrada);
+
                     break;
                 case "2":
                     agenda.listarContatos();
@@ -64,17 +66,20 @@ public class Main {
                 case "9":
                     agenda.removerEndereco(entrada);
                     break;
+                case "10":
+                    Arquivo.exportarArquivo(agenda);
+                    break;
+                case "11":
+                    agenda = Arquivo.importarArquivo();
+                    break;
                 default:
                     System.out.println("Digite uma opção válida");
                     break;
-
             }
 
             System.out.println("Deseja continuar? 1 - Sim, 2 - Não");
             resposta = (entrada.nextLine());
 
         } while(resposta.equals("1"));
-
     }
-
 }
