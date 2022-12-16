@@ -25,4 +25,17 @@ t. Carregar e salvar automaticamente todos os contatos para um arquivo texto. To
 #### Renata Inacio: m, n, r
 #### Patricia Ramos: s, t
 
-Dificuldade: importar e exportar arquivo
+### Requisitos não implementados
+o. Exibir a lista de contatos com paginação. Incluindo a opção para navegar para a página seguinte ou página anterior;
+p. Exibir a lista de telefones do contato com paginação. Incluindo a opção para navegar para a página seguinte ou página anterior;
+q. Exibir a lista de endereços do contato com paginação. Incluindo a opção para navegar para a página seguinte ou página anterior;
+
+
+### Partes do projeto que foram particularmente difíceis;
+- Conciliação de agenda dos integrantes
+- Separação de responsabilidades
+- Conseguir utilizar a lib jackson e fazer o tratamento dos erros relacionados a mesma (só conseguimos com auxilio do professor).
+
+### Partes do projeto que foram particularmente interessantes;
+- Adicioanr e utilizar libs externas no projeto
+- Utilizar o formato json para importar, exportar e salvar o estado da agenda
