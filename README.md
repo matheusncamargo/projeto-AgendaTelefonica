@@ -19,11 +19,11 @@ t. Carregar e salvar automaticamente todos os contatos para um arquivo texto. To
 
 ## Implementações realizadas por:</h3>
 
-#### Matheus Camargo: c, d, e
-#### Davi Garcia: g, h, i
-#### Vitor Pirovani: j, k, l
-#### Renata Inacio: m, n, r
-#### Patricia Ramos: s, t
+- Matheus Camargo</br>
+- Davi Garcia</br>
+- Vitor Pirovani</br>
+- Renata Inacio</br>
+- Patricia Ramos
 
 ### Requisitos não implementados
 o. Exibir a lista de contatos com paginação. Incluindo a opção para navegar para a página seguinte ou página anterior;
